@@ -79,11 +79,9 @@ while running:
                 running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left button click
-                # Get mouse position, unpack tuple of coordinates (int)
-                mouse_x, mouse_y = pygame.mouse.get_pos()  
-                # Add position to anchor_positions list
-                anchor_weight = random.randint(5, 20)
-                anchor_positions_list.append([mouse_x, mouse_y, anchor_weight])
+                mouse_x, mouse_y = pygame.mouse.get_pos()  # Get mouse position, unpack tuple of coordinates (int)
+                anchor_weight = random.randint(5, 20)  # Random anchor "weight" or sinking speed
+                anchor_positions_list.append([mouse_x, mouse_y, anchor_weight])  # Add position to list
 
     # Handle key presses
     keys = pygame.key.get_pressed()
@@ -116,7 +114,7 @@ while running:
     elif keys[pygame.K_UP]:
         dory.y = max(0, dory.y - 5)  # Decrease depth, ensure within screen bounds
  
-    # Handle fish bubble release with space
+    # Handle fish bubble release with space, limiting rate with debounce_time calculation
     current_time = pygame.time.get_ticks()
 
     if keys[pygame.K_SPACE] and (current_time - last_bubble_time) >= debounce_time:
@@ -146,9 +144,8 @@ while running:
     for bubble_item in bubble_list:
         bubble_x, bubble_y, bubble_diameter = bubble_item
         pygame.draw.circle(screen, WHITE, (bubble_x, bubble_y), bubble_diameter)
-        bubble_item[1] -= 5 # Update bubble position
-        # Remove bubbles from list at top of screen
-        if bubble_y <= 0:
+        bubble_item[1] -= 5  # Update bubble position
+        if bubble_y <= 0:  # Remove bubbles from list at top of screen
             bubble_list.remove(bubble_item)
     
     # Draw anchors
