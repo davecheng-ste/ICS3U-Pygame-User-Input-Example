@@ -6,7 +6,7 @@ This is an example demonstrating a [Level 4](#level-4) solution to the assignmen
 
 The file [main_basic.py](main_basic.py) has the program written with without the use of functions and methods. 
 
-The file [main_expert.py](main_expert.py) abstracts many of the steps as discrete functions and methods. You will notice the `while running:` loop is cleaner and easier to read. (It also uses a new data structure called a [dictionary](https://www.w3schools.com/python/python_dictionaries.asp) to store the key mapping for speed. A dictionary is a mutable, indexed container type similar to a list or tuple.)
+The file [main_expert.py](main_expert.py) abstracts many of the steps as discrete functions and methods. Some of these methods are reused, adding to the code's modularity. You will notice the `while running:` loop is cleaner and easier to read. It also uses a new data structure called a [dictionary](https://www.w3schools.com/python/python_dictionaries.asp) to store the key mapping for speed. (A dictionary is a mutable, indexed container type similar to a list or tuple.) Finally, I added error-handling for the file loading steps so that the program will report a useful error message if a file is missing.
 
 ### Notes on My Example
 #### Functionality
