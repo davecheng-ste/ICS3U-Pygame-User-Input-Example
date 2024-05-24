@@ -89,7 +89,7 @@ while running:
     # Handle fish speed increase/decrease
     if keys[pygame.K_0]:
         speed = 1
-    if keys[pygame.K_1]:
+    elif keys[pygame.K_1]:
         speed = 3
     elif keys[pygame.K_2]:
         speed = 5
@@ -125,6 +125,8 @@ while running:
         bubble_diameter = random.randint(3, 10)
         bubble_list.append([bubble_x, bubble_y, bubble_diameter])
         last_bubble_time = current_time
+
+    print(bubble_list)
 
     # Calculate change in position 
     dory.x += speed * direction  # Move sprite horizontally based on speed and direction

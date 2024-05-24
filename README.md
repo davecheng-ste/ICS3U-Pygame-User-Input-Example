@@ -48,7 +48,7 @@ print(bubble_list)  # Output: [[525, 126, 8], [475, 171, 7], [445, 201, 6]]
 This means we have three bubbles on screen:
 
 - Bubble 1 is at (x, y) = (525, 126) with radius 8
-- Bubble 2 is at (x, y) = (475, 172) with radius 7
+- Bubble 2 is at (x, y) = (475, 171) with radius 7
 - Bubble 3 is at (x, y) = (445, 201) with radius 6
 
 Later in the game loop, we iterate through the list to draw them, 
@@ -57,7 +57,7 @@ they have moved off the edge of the screen:
 
 ```python
 for bubble_item in bubble_list:
-    bubble_x, bubble_y, bubble_diameter = bubble_item  # Unpack the tuple
+    bubble_x, bubble_y, bubble_diameter = bubble_item  # Unpack the list
     pygame.draw.circle(screen, WHITE, (bubble_x, bubble_y), bubble_diameter)  # Draw bubble
     bubble_item[1] -= 5  # Update bubble y-position
     if bubble_y <= 0:  # Remove bubbles from list at top of screen
