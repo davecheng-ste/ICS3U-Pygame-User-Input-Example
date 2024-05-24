@@ -35,10 +35,10 @@ def load_image(file_path):
     Load an image from the given file path. Exit if the image cannot be loaded.
 
     Parameters:
-    file_path (str): The path to the image file.
+        file_path (str): The path to the image file.
 
     Returns:
-    pygame.Surface: The loaded image.
+        pygame.Surface: The loaded image.
     """
     try:
         image = pygame.image.load(file_path)
@@ -78,7 +78,7 @@ def handle_events():
     Handle all Pygame events. Return False if the game should quit.
 
     Returns:
-    bool: False if the game should quit, True otherwise.
+        bool: False if the game should quit, True otherwise.
     """
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -138,7 +138,7 @@ def adjust_fish_speed(keys):
     Adjust the fish's speed based on the number key pressed.
 
     Parameters:
-    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+        keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
     """
     global speed
     for key, value in speed_keys.items():
@@ -152,7 +152,7 @@ def move_fish(keys):
     Flip the fish's direction if it hits the screen edge.
 
     Parameters:
-    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+        keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
     """
     global direction, fish_sprite
     dory.x += speed * direction
@@ -173,7 +173,7 @@ def release_bubble(keys):
     Release a bubble from the fish if the space key is pressed and the debounce time has passed.
 
     Parameters:
-    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+        keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
     """
     global last_bubble_time
     current_time = pygame.time.get_ticks()
