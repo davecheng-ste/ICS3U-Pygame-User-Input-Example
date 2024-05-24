@@ -10,6 +10,7 @@ import pygame
 import sys
 import random
 
+
 # Initialize Pygame
 pygame.init()
 
@@ -30,6 +31,15 @@ text_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT - 10))
 
 # Load images with error handling
 def load_image(file_path):
+    """
+    Load an image from the given file path. Exit if the image cannot be loaded.
+
+    Parameters:
+    file_path (str): The path to the image file.
+
+    Returns:
+    pygame.Surface: The loaded image.
+    """
     try:
         image = pygame.image.load(file_path)
         return image
@@ -62,8 +72,14 @@ speed_keys = {
     pygame.K_5: 11, pygame.K_6: 13, pygame.K_7: 15, pygame.K_8: 17, pygame.K_9: 19
 }
 
-# Define functions
+
 def handle_events():
+    """
+    Handle all Pygame events. Return False if the game should quit.
+
+    Returns:
+    bool: False if the game should quit, True otherwise.
+    """
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
@@ -73,24 +89,40 @@ def handle_events():
             handle_mouse_click()
     return True
 
+
 def handle_mouse_click():
+    """
+    Handle mouse click events by adding an anchor at the clicked position.
+    """
     mouse_x, mouse_y = pygame.mouse.get_pos()
     anchor_weight = random.randint(5, 20)
     anchor_positions_list.append([mouse_x, mouse_y, anchor_weight])
 
+
 def update_bubbles():
+    """
+    Update the position of bubbles and remove those that have left the screen.
+    """
     for bubble_item in bubble_list:
         bubble_item[1] -= 5
         if bubble_item[1] <= 0:
             bubble_list.remove(bubble_item)
 
+
 def update_anchors():
+    """
+    Update the position of anchors and remove those that have fallen out of the screen.
+    """
     for anchor_item in anchor_positions_list:
         anchor_item[1] += anchor_item[2]
         if anchor_item[1] >= HEIGHT:
             anchor_positions_list.remove(anchor_item)
 
+
 def draw_elements():
+    """
+    Draw all elements (background, bubbles, anchors, fish, and text) on the screen.
+    """
     screen.blit(ocean_background, (0, 0))
     for bubble_item in bubble_list:
         pygame.draw.circle(screen, WHITE, (bubble_item[0], bubble_item[1]), bubble_item[2])
@@ -100,13 +132,28 @@ def draw_elements():
     screen.blit(text_surface, text_rect)
     pygame.display.flip()
 
+
 def adjust_fish_speed(keys):
+    """
+    Adjust the fish's speed based on the number key pressed.
+
+    Parameters:
+    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+    """
     global speed
     for key, value in speed_keys.items():
         if keys[key]:
             speed = value
 
+
 def move_fish(keys):
+    """
+    Move the fish horizontally and vertically based on the current speed and direction.
+    Flip the fish's direction if it hits the screen edge.
+
+    Parameters:
+    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+    """
     global direction, fish_sprite
     dory.x += speed * direction
     if keys[pygame.K_DOWN]:
@@ -120,7 +167,14 @@ def move_fish(keys):
         direction = -1
         fish_sprite = pygame.transform.flip(fish_sprite, True, False)
 
+
 def release_bubble(keys):
+    """
+    Release a bubble from the fish if the space key is pressed and the debounce time has passed.
+
+    Parameters:
+    keys (pygame.key.ScancodeWrapper): The current state of all keyboard buttons.
+    """
     global last_bubble_time
     current_time = pygame.time.get_ticks()
     if keys[pygame.K_SPACE] and (current_time - last_bubble_time) >= debounce_time:
@@ -128,6 +182,7 @@ def release_bubble(keys):
         bubble_diameter = random.randint(3, 10)
         bubble_list.append([bubble_x, bubble_y, bubble_diameter])
         last_bubble_time = current_time
+
 
 # Main game loop
 running = True
